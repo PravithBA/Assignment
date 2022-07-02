@@ -9,9 +9,12 @@
     justify-content: center;
 }
 .table{
-    width:80vw;
+    width:90vw;
     margin-top: 10vh;
     background-color: var(--table-color);
+}
+.search-bar{
+    font-size: 0.8em;
 }
 nav{
     display: flex;
@@ -39,4 +42,80 @@ nav{
     font-size: 0.8em;
     padding: 0.2em;
     width: 15em;
+}
+.task-c{
+    display: grid;
+    grid-auto-flow: column;
+    padding: 0em 1em;
+    place-items: center;
+}
+.task-c > div, .task-c > button{
+    font-size: 0.5em;
+    width: 8.1vw;
+    height: 100%;
+    text-align: center;
+    line-height: 3em;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.nav{
+    background-color: rgb(30, 30, 30);
+    font-size: 0.45em !important;
+}
+.date{
+    grid-column: 1;
+}
+.name{
+    grid-column: 2/4;
+    width: 18vw !important;
+}
+.type{
+    grid-column: 4;
+}
+.time{
+    grid-column: 5;
+}
+.cont{
+    grid-column: 6;
+}
+.note{
+    grid-column: 7/9;
+    width: 18vw !important;
+}
+.stat{
+    grid-column: 9;
+}
+.opt{
+    grid-column: 10;
+    cursor:pointer
+}
+.opt:hover + .option-menu, .option-menu:hover, .opt:focus + .option-menu{
+    display: flex;
+}
+.option-menu{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    margin-left: 70em;
+    margin-top:12em;
+    height: fit-content !important;
+    background-color: rgb(24, 24, 24);
+    padding: 0.6em 1em;
+    padding-bottom: 1em;
+}
+.option-menu > button{
+    font-size: 0.5rem;
+    text-align: left;
+    padding-left: 0.2em;
+    transition: all 200ms;
+    margin-top: 0.5em;
+}
+.option-menu > button:hover{
+    color: rgb(0, 221, 255);
+}
+.option-menu > h5{
+    font-size: 1em;
+    border-bottom: 0.1em solid white;
+    margin-bottom: 0.2em;
 }
