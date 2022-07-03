@@ -1,6 +1,5 @@
 {
     "tasks":[{
-            "id":1,
             "date":"02/07/2022",
             "company":"Otnem Pvt Ltd",
             "type":"Call",
@@ -9,14 +8,13 @@
             "notes":"This is an awesome task.",
             "status":"Open"
         },{
-            "id":1,
             "date":"02/07/2022",
             "company":"Otnem Pvt Ltd",
             "type":"Call",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
-            "status":"Open"
+            "status":"Closed"
         }
     ]
 }

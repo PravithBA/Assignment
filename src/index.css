@@ -3,15 +3,45 @@ body {
   font-family: 'Courier New', Courier, monospace;
   background-color: rgb(33, 33, 33);
 }
+::-webkit-scrollbar{
+
+  width: 5px;
+  height:0px;
+
+}
+::-webkit-scrollbar-thumb{
+
+  background: rgb(48, 48, 48);
+  border-radius: 5px;
+
+}
+::-webkit-scrollbar-thumb:hover{
+
+  background: rgb(58, 58, 58);
+
+}
+::-webkit-scrollbar-track{
+
+  background: transparent;
+  
+}
+::-webkit-scrollbar-corner{
+  width: 0px;
+  height: 0px;
+}
 *{
   color:white;
   margin: 0;
   padding: 0;
   font-size: 30px;
+  overflow-x: hidden;
 }
-button{
+button,input{
   background: none;
   border:none;
   cursor:pointer;
   font-family: inherit;
+}
+input{
+  cursor:text;
 }
