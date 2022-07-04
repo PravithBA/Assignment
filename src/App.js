@@ -10,17 +10,20 @@ import Popup from './components/Popup';
 
 function App() {
 document.title = 'Team Manager'
-const [tasks,setTasks] = useState([])
+const [tasks,setTasks] = useState(data.tasks)
 const [newActive,setNewActive] = useState(false)
-const [mobActive,setMobActive] = useState(-1) 
+const [mobActive,setMobActive] = useState(-1)
+const [filters,setFilters] = useState({orderBy:"date",dir:"asc",filters:['Message']})
 useEffect(()=>{
     async function getData(){
+        setTasks(data.tasks)
     }
     getData()
-    setTasks(data.tasks)
+    filter()
 },[])
 useEffect(()=>{
-},[tasks])
+    filter()
+},[filters])
 const editTask = (field,data,id)=>{
     const newTasks = tasks
     const reqTask = newTasks[id]
@@ -34,6 +37,50 @@ const duplicateTask = (id)=>{
     newTasks.splice(id+1,0,reqTask)
     setTasks([...newTasks])
 }
+const filter = ()=>{
+    if(!tasks[0])
+        return 
+    let currTasks = [...tasks]
+    function condition(a,b){
+        if(!a,!b)
+            return true
+        let cond
+        let date1 = a.date
+        let date2 = b.date
+        let comp1 = a.company
+        let comp2 = b.company
+        switch (true) {
+            case (filters.orderBy === 'date' && filters.dir === "desc"):
+                date1 = date1.split("/")
+                date2 = date2.split("/")
+                if(!(date1.length === date2.length && date1.length === 3))
+                    return 0
+                if((date1.every((date,i)=> Number(date) === NaN && Number(date2[i]) === NaN)))
+                    return 0
+                return (date1[2] > date2[2] || date1[1] > date2[1] || date1[0] > date2[0])?1:-1
+            case (filters.orderBy === 'date' && filters.dir === "asc"):cond = (a.date < b.date)
+                date1 = date1.split("/")
+                date2 = date2.split("/")
+                if(!(date1.length === date2.length && date1.length === 3))
+                    return 0
+                if((date1.every((date,i)=> Number(date) === NaN && Number(date2[i]) === NaN)))
+                    return 0
+                return (date1[2] < date2[2] || date1[1] < date2[1] || date1[0] < date2[0])?1:-1
+            case (filters.orderBy === 'name' && filters.dir === "desc"):
+                return comp1.localeCompare(comp2)
+            case (filters.orderBy === 'name' && filters.dir === "asc"):
+                return comp2.localeCompare(comp1)
+            default:
+                break;
+        }
+        return 0
+    }
+    let newTasks = currTasks.sort((a,b)=>condition(a,b))
+    if(!filters[0])
+        newTasks = newTasks.filter(task=>filters.filters.includes(task.type))
+    setTasks([...newTasks])
+}
+const options = [{label:"Call",value:"call"},{label:"Meeting",value:"meeting"},{label:"Vide Call",value:"vid"}]
 return (
     <>
     <div className="main">
@@ -50,8 +97,8 @@ return (
         <div className="task-container">
             
             <div className='task-c'>
-                <div style={{cursor:'pointer'}} className='nav date'>Date</div>
-                <div style={{cursor:'pointer'}} className='nav name'>Company Name</div>
+                <div style={{cursor:'pointer'}} onClick={()=>{setFilters({...filters,orderBy:"date",dir:(filters.dir === 'asc')?"desc":"asc"})}} className='nav date'>Date</div>
+                <div style={{cursor:'pointer'}} onClick={()=>{setFilters({...filters,orderBy:"name",dir:(filters.dir === 'asc')?"desc":"asc"})}} className='nav name'>Company Name</div>
                 <div style={{cursor:'pointer'}} className='nav type'>Task type</div>
                 <div style={{cursor:'pointer'}} className='nav time'>Time</div>
                 <div style={{cursor:'pointer'}} className='nav cont'>Contact </div>
@@ -59,6 +106,7 @@ return (
                 <div style={{cursor:'pointer'}} className='nav stat'>Status</div>
                 <div style={{cursor:'pointer'}} className='nav opt'>Options</div>
             </div>
+            {(tasks[0])?"":<h1 style={{textAlign:"center",fontSize:"0.6em",padding:"1em 0.5em 0 0",color:"red"}}>No Tasks Available</h1>}
             {tasks.map((task, i)=>{
                 return(
                 <div key={i} type="tasks" className={`task-c ${(mobActive === i)?"mob-active":""}`}>

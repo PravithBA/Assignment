@@ -1,124 +1,60 @@
 {
     "tasks":[{
             "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
+            "company":"aOtnem Pvt Ltd",
             "type":"Call",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
             "status":"Open"
         },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
+            "date":"03/07/2022",
+            "company":"bOtnem Pvt Ltd",
+            "type":"Message",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
-            "status":"Closed"
+            "status":"Open"
         },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
+            "date":"04/07/2022",
+            "company":"cOtnem Pvt Ltd",
             "type":"Call",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
-            "status":"Closed"
+            "status":"Open"
         },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
+            "date":"04/08/2022",
+            "company":"dOtnem Pvt Ltd",
             "type":"Call",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
-            "status":"Closed"
+            "status":"Open"
         },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
+            "date":"04/08/2023",
+            "company":"eOtnem Pvt Ltd",
             "type":"Call",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
-            "status":"Closed"
+            "status":"Open"
         },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
+            "date":"04/08/2023",
+            "company":"eOtnem Pvt Ltd",
             "type":"Call",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
-            "status":"Closed"
+            "status":"Open"
         },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
+            "date":"04/08/2023",
+            "company":"eOtnem Pvt Ltd",
             "type":"Call",
             "time":"1:00",
             "contact":"Pravith B A",
             "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
-        },{
-            "date":"02/07/2022",
-            "company":"Otnem Pvt Ltd",
-            "type":"Call",
-            "time":"1:00",
-            "contact":"Pravith B A",
-            "notes":"This is an awesome task.",
-            "status":"Closed"
+            "status":"Open"
         }
     ]
 }

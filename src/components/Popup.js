@@ -8,7 +8,10 @@ const addTask = (e)=>{
     e.preventDefault()
     let elements = Array.from(e.target.elements)
     if(!elements.every(element=> {
-        if(!(element.tagName === "INPUT"))
+        if((element.placeholder === "Date" && ((element.value.split("/")).length !== 3 || (element.value.split("/")).some((date)=>isNaN(Number(date)))))){
+            return false
+        }
+        else if(!(element.tagName === "INPUT"))
             return true
         else if(element.value !== '' || element.id.startsWith("react-select"))
             return true
@@ -17,35 +20,36 @@ const addTask = (e)=>{
     }))
         return setErr("All fields not filled properly")
     let newTask = {
-    date:"",
-    company:"Otnem Pvt Ltd",
-    type:"Call",
-    time:"",
-    contact:"Pravith B A",
-    notes:"This is an awesome task.",
-    status:"Open"
+        date:"",
+        company:"Otnem Pvt Ltd",
+        type:"Call",
+        time:"",
+        contact:"Pravith B A",
+        notes:"This is an awesome task.",
+        status:"Open"
     }
     elements.forEach(element=>{
         if(element.getAttribute('name') === 'select')
             newTask['type'] = selectV
         else if((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && (element.name !== '' && element))
             newTask[element.name] = element.value
+        element.value = ''
     })
     let newTasks = [...tasks]
     newTasks.push(newTask)
     setTasks([...newTasks])
     setActive(false)
+    setErr('')
 }
 const customStyles = {
     option: (provided, state) => ({
     ...provided,
     color: state.isSelected ? 'white' : 'black',
-    fontSize:"0.6em"
+    fontSize:"0.6em",
     }),
     control: (provided) => ({
     ...provided,
     background:'rgb(40,40,40)',
-    display:"flex",
     fontSize:"0.1em",
     border:"none"
     }),
@@ -67,7 +71,7 @@ function customTheme(theme){
     }
     }
 }
-const options = [{label:"Call",value:"Call"},{label:"Message",value:"Message"}]
+const options = [{label:"Call",value:"call"},{label:"Meeting",value:"meeting"},{label:"Vide Call",value:"vid"}]
 const handleChange = e=>{
     setSelectV(e.value)
 }
@@ -77,15 +81,14 @@ return (
     </div>
     <form className={(active)?"active":""} onSubmit={(e)=>{addTask(e)}}>
         <nav>New Task</nav>
+        {(err !== '')?<h1 style={{textAlign:"center",fontSize:"0.6em",padding:"1em 0.5em 0 0",color:"red"}}>{err}</h1>:""}
         <div className='val-c' >
             <input placeholder='Entry Name' name='contact'/>
             <div className='date-time'>
                 <input type="text" placeholder='Date' name='date'/>
                 <input type="time" name='time'/>
             </div>
-            <div className='select-div'>
-                <Select onChange={handleChange} theme={customTheme} styles={customStyles} name="select" options={options} />
-            </div>
+            <Select isMulti onChange={handleChange} theme={customTheme} styles={customStyles} name="select" options={options} />
             <input placeholder='Company' name='company'/>
             <textarea placeholder='Notes (optional)' name='notes' rows={6} style={{resize:"none"}}/>
             <div className='form-btn'>
