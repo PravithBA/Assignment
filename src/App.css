@@ -49,7 +49,8 @@ nav{
     font-size: 0.8em;
     padding: 0.2em;
     width: 15em;
-}@media only screen and (max-width:760px){
+}
+@media only screen and (max-width:760px){
     .table{
         width: 100vw;
         margin: 0;
@@ -66,6 +67,26 @@ nav{
 }
 /* Table-Outer end */
 /* Tasks */
+.filter-container{
+    display: flex;
+    overflow: auto;
+    margin: 0 1em;
+    padding: 0 0.4em;
+    height:1.1em;
+    border: solid rgba(255, 255, 255, 0.269);
+    border-width: 0.05em 0;
+    gap:0.5em;
+}
+.filter{
+    font-size: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+    transition:all 200ms;
+    border-radius: 0.3em;
+}
+.filter:hover, .filter:focus{
+    background-color: var(--contrast-red);
+}
 .task-c{
     display: grid;
     grid-auto-flow: column;
@@ -109,6 +130,9 @@ nav{
 .stat{
     grid-column: 9;
 }
+.stat-mobile{
+    display: none !important;
+}
 .opt{
     grid-column: 10;
     cursor:pointer
@@ -120,6 +144,11 @@ nav{
     display: none !important;
 }
 @media only screen and (max-width:760px){
+    .filter-container{
+        margin: 0;
+        white-space: nowrap;
+        overflow-x: auto !important;
+    }
     .task-c{
         padding: 0em;
         padding-right: 0.5em;
@@ -156,8 +185,25 @@ nav{
     .open-not-btn{
         display: none !important;
     }
+    .stat{
+        display: none !important;
+    }
+    .stat-mobile{
+        display: block !important;
+    }
 }
 /* Tooltip */
+.nav[type="task"]:hover > .task-tooltip{
+    display: grid;
+}
+.task-tooltip{
+    margin-top: 0vh !important;
+    margin-left: 0vw !important;
+    margin-right: 0vw !important;
+}
+.task-tooltip > h5{
+    font-size: 0.6em !important;
+}
 .opt:hover + .opt-menu, .tooltip-menu:hover, .opt:focus + .tooltip-menu{
     display: flex;
 }

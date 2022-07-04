@@ -33,8 +33,7 @@ body {
   color:white;
   margin: 0;
   padding: 0;
-  font-size: 30px;
-  overflow-x: hidden;
+  font-size: 2vw;
 }
 button,input{
   background: none;
@@ -44,4 +43,9 @@ button,input{
 }
 input{
   cursor:text;
+}
+@media only screen and (max-width:760px){
+  *{
+    font-size: 30px;
+  }
 }
