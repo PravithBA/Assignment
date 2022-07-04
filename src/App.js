@@ -55,16 +55,16 @@ const filter = (search)=>{
         let comp2 = b.company
         switch (true) {
             case (filters.orderBy === 'date' && filters.dir === "desc"):
-                date1 = date1.split("/")
-                date2 = date2.split("/")
+                date1 = date1.split("-")
+                date2 = date2.split("-")
                 if(!(date1.length === date2.length && date1.length === 3))
                     return 0
                 if((date1.every((date,i)=> Number(date) === NaN && Number(date2[i]) === NaN)))
                     return 0
                 return (date1[2] > date2[2] || date1[1] > date2[1] || date1[0] > date2[0])?1:-1
             case (filters.orderBy === 'date' && filters.dir === "asc"):cond = (a.date < b.date)
-                date1 = date1.split("/")
-                date2 = date2.split("/")
+                date1 = date1.split("-")
+                date2 = date2.split("-")
                 if(!(date1.length === date2.length && date1.length === 3))
                     return 0
                 if((date1.every((date,i)=> Number(date) === NaN && Number(date2[i]) === NaN)))
@@ -173,6 +173,7 @@ return (
                         let newTasks = filteredTasks
                         newTasks.splice(i,1)
                         setFilteredTasks([...newTasks])
+                        setTasks([...newTasks])
                     }}>Delete</button>
                     <button className='dup' onClick={()=>{duplicateTask(i)}}>Duplicate</button>
                     <button className='change' onClick={()=>{editTask("status",(task.status !== "Open")?"Open":"Closed",i)}}>Change Status</button>
