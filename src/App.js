@@ -15,7 +15,7 @@ const [tasks,setTasks] = useState((data.tasks)?data.tasks:{})
 const [filteredTasks,setFilteredTasks] = useState((data.tasks)?data.tasks:{})
 const [newActive,setNewActive] = useState(false)
 const [mobActive,setMobActive] = useState(-1)
-const [filters,setFilters] = useState({orderBy:"date",dir:"asc",filters:['Meeting','Call','Call','Call']})
+const [filters,setFilters] = useState({orderBy:"date",dir:"asc",filters:[]})
 useEffect(()=>{
     async function getData(){
         setTasks(data.tasks)
@@ -27,7 +27,6 @@ useEffect(()=>{
 useEffect(()=>{
     filter()
 },[filters])
-useEffect(()=>{},[filteredTasks])
 const editTask = (field,data,id)=>{
     const newTasks = filteredTasks
     const reqTask = newTasks[id]
@@ -41,7 +40,7 @@ const duplicateTask = (id)=>{
     newTasks.splice(id+1,0,reqTask)
     setTasks([...newTasks])
 }
-const filter = ()=>{
+const filter = (search)=>{
     if(!tasks[0])
         return 
     let currTasks = [...tasks]
@@ -81,6 +80,10 @@ const filter = ()=>{
     }
     if(filters.filters[0])
         currTasks = currTasks.filter(task=>filters.filters.includes(task.type))
+    if(search){
+        currTasks = currTasks.filter(task=>task.company.includes(search))
+        console.log(currTasks)
+    }
     let newTasks = currTasks.sort((a,b)=>condition(a,b))
     setFilteredTasks([...newTasks])
 }
@@ -95,13 +98,19 @@ return (
                 Add New Task
             </button>
             <Popup setTasks={setFilteredTasks} tasks={filteredTasks} active={newActive} setActive={setNewActive}/>
-            <input className='search-bar' placeholder='Search ' />
+            <input className='search-bar' onKeyUp={(e)=>{
+                if(e.key === "Enter"){
+                    filter(e.target.value)
+                    e.target.value = ''
+                }
+            }} placeholder='Search ' />
         </nav>
         <div className="task-container">
             <div className='filter-container'>
                 <div style={{fontSize:"0.4em"}}>
                     <FontAwesomeIcon style={{fontSize:"1em",marginTop:"0.7em"}} icon={faFilter}/>
                 </div>
+                {(filters.filters[0])?"":<div style={{fontSize:"0.5em",lineHeight:"2.4em"}}>Add Filters...</div>}
                 {filters.filters.map((filter,i)=>{
                     return <div key={i} style={{display:"grid",placeItems:"center",gridAutoFlow:"column",gap:"0.2em"}} onClick={()=>{
                         let newFilter = [...filters.filters]
@@ -114,8 +123,9 @@ return (
                 <div style={{cursor:'pointer'}} onClick={()=>{setFilters({...filters,orderBy:"date",dir:(filters.dir === 'asc')?"desc":"asc"})}} className='nav date'>Date</div>
                 <div style={{cursor:'pointer'}} onClick={()=>{setFilters({...filters,orderBy:"name",dir:(filters.dir === 'asc')?"desc":"asc"})}} className='nav name'>Company Name</div>
                 <div style={{cursor:'pointer'}} type="task" className='nav type'>Task type
-                <div className="tooltip-menu task-tooltip">
+                <div style={{cursor:'default'}} className="tooltip-menu task-tooltip">
                     <h5>Choose Task</h5>
+                    <h6 style={{fontSize:"0.5em"}}>{(filters.filters.length < 3)?"":"No Filters"}</h6>
                     {["Call","Meeting","Video Call"].map((f,i)=>{
                         if(!filters.filters.includes(f))
                         return <button key={i} onClick={()=>{
@@ -159,7 +169,11 @@ return (
                     </button>
                     <div className='tooltip-menu opt-menu'>
                     <h5>Options</h5>
-                    <button className='edit'>Edit</button>
+                    <button className='delete' onClick={()=>{
+                        let newTasks = filteredTasks
+                        newTasks.splice(i,1)
+                        setFilteredTasks([...newTasks])
+                    }}>Delete</button>
                     <button className='dup' onClick={()=>{duplicateTask(i)}}>Duplicate</button>
                     <button className='change' onClick={()=>{editTask("status",(task.status !== "Open")?"Open":"Closed",i)}}>Change Status</button>
                     </div>
