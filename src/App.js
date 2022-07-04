@@ -1,7 +1,7 @@
 import './App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  } from '@fortawesome/free-brands-svg-icons';
-import { faCirclePlay, faPlusSquare, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
+import { faCirclePlay, faPlusSquare, faSquarePlus, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
 import data from './data.json'
 import axios from 'axios';
@@ -12,6 +12,7 @@ function App() {
 document.title = 'Team Manager'
 const [tasks,setTasks] = useState([])
 const [newActive,setNewActive] = useState(false)
+const [mobActive,setMobActive] = useState(-1) 
 useEffect(()=>{
     async function getData(){
     }
@@ -48,19 +49,20 @@ return (
         </nav>
         <div className="task-container">
             
-            <div  className='task-c'>
-            <div className='nav date'>Date</div>
-            <div className='nav name'>Company Name</div>
-            <div className='nav type'>Task type</div>
-            <div className='nav time'>Time</div>
-            <div className='nav cont'>Contact </div>
-            <div className='nav note'>Notes</div>
-            <div className='nav stat'>Status</div>
-            <div className='nav opt' style={{cursor:'default'}}>Options</div>
+            <div className='task-c'>
+                <div style={{cursor:'pointer'}} className='nav date'>Date</div>
+                <div style={{cursor:'pointer'}} className='nav name'>Company Name</div>
+                <div style={{cursor:'pointer'}} className='nav type'>Task type</div>
+                <div style={{cursor:'pointer'}} className='nav time'>Time</div>
+                <div style={{cursor:'pointer'}} className='nav cont'>Contact </div>
+                <div style={{cursor:'pointer'}} className='nav note'>Notes</div>
+                <div style={{cursor:'pointer'}} className='nav stat'>Status</div>
+                <div style={{cursor:'pointer'}} className='nav opt'>Options</div>
             </div>
             {tasks.map((task, i)=>{
                 return(
-                <div key={i} className='task-c'>
+                <div key={i} type="tasks" className={`task-c ${(mobActive === i)?"mob-active":""}`}>
+                    <FontAwesomeIcon className={(newActive)?"open-not-btn":"open-btn"} icon={(mobActive !== i)?faCirclePlay:faXmarkCircle} onClick={()=>setMobActive((mobActive === i)?-1:i)}/>
                     <div className='date'>{task.date}</div>
                     <div className='name'>{task.company}</div>
                     <div className='type'>{task.type}</div>
@@ -71,7 +73,7 @@ return (
                     <div className="tooltip-menu stat-menu">
                     <h5>Status</h5>
                     <button onClick={()=>{editTask("status",(task.status !== "Open")?"Open":"Closed",i)}}>{(task.status !== "Open")?"Open":"Close"}</button>
-                    </div>
+                </div>
                     <button className='opt option'>Options
                     </button>
                     <div className='tooltip-menu opt-menu'>

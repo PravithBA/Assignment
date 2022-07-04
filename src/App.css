@@ -5,10 +5,14 @@
 }
 .main{
     width:100vw;
-    height:100vh;
+    min-height:100vh;
     display: grid;
     justify-content: center;
 }
+@media only screen and (max-width:760px){
+    
+}
+/* Table-Outer */
 .table{
     width:90vw;
     margin-top: 10vh;
@@ -45,7 +49,23 @@ nav{
     font-size: 0.8em;
     padding: 0.2em;
     width: 15em;
+}@media only screen and (max-width:760px){
+    .table{
+        width: 100vw;
+        margin: 0;
+    }
+    nav{
+        flex-direction: column;
+    }
+    .add-task-btn{
+        font-size: 0.4em;
+    }
+    .search-bar{
+        width: 90%;
+    }
 }
+/* Table-Outer end */
+/* Tasks */
 .task-c{
     display: grid;
     grid-auto-flow: column;
@@ -93,6 +113,51 @@ nav{
     grid-column: 10;
     cursor:pointer
 }
+.open-btn{
+    display: none;
+}
+.open-not-btn{
+    display: none !important;
+}
+@media only screen and (max-width:760px){
+    .task-c{
+        padding: 0em;
+        padding-right: 0.5em;
+        /* gap: 0.1em; */
+    }
+    .date,.name{
+        width: 50vw;
+    }
+    .type,.time,.cont,.note,.stat,.opt{
+        display: none ;
+    }
+    .mob-active > .type,.mob-active > .time,.mob-active > .cont,.mob-active > .note,.mob-active > .stat,.mob-active > .opt{
+        display: block ;
+        width: 100% !important;
+    }
+    .task-c > div, .task-c > button{
+        width:48.5vw !important;
+    }
+    .mob-active{
+        display: flex;
+        flex-direction: column;
+    }
+    .open-btn{
+        display: block;
+        grid-column:1;
+        font-size:0.6em;
+        position:absolute;
+        left:0;
+        margin-top:-0.5em
+    }
+    .mob-active > .open-btn{
+        margin-top:0.8em;
+    }
+    .open-not-btn{
+        display: none !important;
+    }
+}
+/* Tooltip */
 .opt:hover + .opt-menu, .tooltip-menu:hover, .opt:focus + .tooltip-menu{
     display: flex;
 }
@@ -129,6 +194,9 @@ nav{
     border-bottom: 0.1em solid white;
     margin-bottom: 0.2em;
 }
+/* Tooltip End */
+/* Tasks End */
+/* Add Task Menu */
 .task-menu{
     margin: 0;
     padding: 0;
@@ -178,10 +246,10 @@ nav{
     font-size: 1em;
     padding: 1em;
     border-radius: 0.5em;
+    transition: all 200ms;
 }
 .form-btn > button[type="submit"]{
     background-color: var(--contrast-red);
-    transition: all 200ms;
 }
 .form-btn > button:hover{
     transform: scale(1.1);
@@ -197,3 +265,15 @@ nav{
     font-size: 1em;
     padding: 0.8em;
 }
+@media only screen and (max-width:760px){
+    .task-menu + form{
+        top:0;
+        left: 0;
+        margin: 0;
+        width: 100vw;
+    }
+    .task-menu{
+        position: fixed;
+    }
+}
+/* Add Task Menu */
