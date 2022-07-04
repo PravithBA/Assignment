@@ -11,6 +11,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
 document.title = 'Team Manager'
+document.icon = "l"
 const [tasks,setTasks] = useState((data.tasks)?data.tasks:{})
 const [filteredTasks,setFilteredTasks] = useState((data.tasks)?data.tasks:{})
 const [newActive,setNewActive] = useState(false)
@@ -82,7 +83,6 @@ const filter = (search)=>{
         currTasks = currTasks.filter(task=>filters.filters.includes(task.type))
     if(search){
         currTasks = currTasks.filter(task=>task.company.includes(search))
-        console.log(currTasks)
     }
     let newTasks = currTasks.sort((a,b)=>condition(a,b))
     setFilteredTasks([...newTasks])

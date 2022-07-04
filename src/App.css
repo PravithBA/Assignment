@@ -188,8 +188,11 @@ nav{
     .stat{
         display: none !important;
     }
-    .stat-mobile{
+    .mob-active > .stat-mobile{
         display: block !important;
+    }
+    .opt{
+        display: none;
     }
 }
 /* Tooltip */
